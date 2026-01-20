@@ -4,10 +4,21 @@ services:
     build: .
     image: expense-tracker-api:1.0
     container_name: fastapi_app
+    environment:
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      MINIO_SECURE: "False"
+      PREFECT_API_URL: http://prefect-server:4200/api
+      MONGODB_INITDB_ROOT_USERNAME: user
+      MONGODB_INITDB_ROOT_PASSWORD: pass
+      MONGO_URL: mongodb://user:pass@mongodb:27017/
     ports:
       - "8000:8000"
     depends_on:
       mongodb:
+        condition: "service_healthy"
+      minio:
         condition: "service_healthy"
     volumes:
       - .:/app

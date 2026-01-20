@@ -1,5 +1,5 @@
 .env
-data/sources
+flows/data/sources
 __pycache__
 Readme.md
 venv

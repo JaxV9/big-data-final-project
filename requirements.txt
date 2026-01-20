@@ -91,6 +91,7 @@ pydantic_core==2.41.5
 pydeck==0.9.1
 pydocket==0.16.6
 Pygments==2.19.2
+pymongo==4.16.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.1
 python-json-logger==4.0.0
