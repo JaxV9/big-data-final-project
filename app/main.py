@@ -47,6 +47,15 @@ async def readDataToMongo(collection_name: str):
 
     return kpis
 
+@app.get("/generatedata")
+async def generateData():
+    file = get_file_from_gold('amount_per_month.parquet')
+    await insertDataToMongo(file, "amount_per_month")
+    
+    return({
+        "message": "ok"
+    })
+
 @app.get("/")
 async def root():
     file = get_file_from_gold('amount_per_month.parquet')
@@ -56,8 +65,7 @@ async def root():
     if pd.isna(value):
         value = None
     
-    kpi = await readDataToMongo("amount_per_month")
-    
+    kpi = await readDataToMongo("amount_per_month")    
     return {
         "colonnes": df.columns.tolist(),
         "nombre_lignes": len(df),
