@@ -1,8 +1,6 @@
 from io import BytesIO
 from pathlib import Path
-
 from prefect import flow, task
-
 from config import BUCKET_BRONZE, BUCKET_SOURCES, get_minio_client
 
 @task(name="upload_to_sources", retries=2)
